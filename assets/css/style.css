@@ -1,0 +1,27 @@
+.jumbotron {
+	padding-bottom: 0px;
+	padding-top: 0px;
+	font-size: 20px;
+}
+
+.redWolfButton {
+	background-color: red;
+}
+
+.greenAppleButton {
+	background-color: green;
+}
+
+.blueButterflyButton {
+	background-color: blue;
+}
+
+.pinkSkullButton {
+	background-color: pink;
+	color: black;
+}
+
+span {
+	font-size: 15px;
+	line-height: 0.5;
+}
