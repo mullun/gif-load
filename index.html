@@ -52,7 +52,7 @@
 			})
 			.done(function(response) {
 				var results = response.data;
-				$("#gifImages").empty();
+				$("#gifImages").empty();   // clear out the existing images
 				for (var i = 0; i < results.length; i ++) {
 					var gifImageDiv = $("<div class='gifImageClass'>");  // div to hold the GIF images
 					var rating = results[i].rating;   // capture the rating of the GIF
