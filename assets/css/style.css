@@ -4,8 +4,17 @@
 	font-size: 20px;
 }
 
-.redWolfButton {
-	background-color: red;
+.animalButton {
+	background-color: #6E62B3;
+	color: white;
+	margin: 5px;
+	/*padding-right: 5px;
+	padding-left: 5px;*/
+}
+
+.gifImageClass {
+	float: left;
+	padding-left: 10px;
 }
 
 .greenAppleButton {
