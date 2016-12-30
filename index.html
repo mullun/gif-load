@@ -43,6 +43,7 @@
 
 		// This function handles events where one button is clicked
 		$("button").on("click", function() {
+			console.log("one button clicked");
 			var clickedButton = $(this).data("name");  // grab data-name of clicked button
 			var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + clickedButton + "&api_key=dc6zaTOxFJmzC&limit=10";
 
@@ -54,7 +55,7 @@
 				var results = response.data;
 				$("#gifImages").empty();   // clear out the existing images
 				for (var i = 0; i < results.length; i ++) {
-					var gifImageDiv = $("<div class='gifImageClass'>");  // div to hold the GIF images
+					var gifImageDiv = $("<div class='gifImageClass' id='gifImgDiv'>");  // div to hold the GIF images
 					var rating = results[i].rating;   // capture the rating of the GIF
 					var p = $("<p>").text("Rating: " + rating);  // create a P tag with text about rating
 					var gifImage = $("<img>").attr("src", results[i].images.fixed_height.url);   // set the src attribute of img tag
@@ -65,6 +66,21 @@
 
 			})
 		});
+
+		// the following code handles the event when a GIF image is clicked
+		$("#gifImgDiv").on("click", function() {
+			var imageState = $(this).attr("data-state");  // grab data-state of clicked image
+			console.log("image attr = " + $(this).attr("src"));
+			if (imageState === "still") {
+				console.log("image attr = " + $(this).attr("src"));
+				$(this).attr("src", $(this).attr("data-animate"));
+				$(this).attr("data-state", "animate");
+			} else {  // if image state === animate, change it to still
+				$(this).attr("src", $(this).attr("data-still"));
+				$(this).attr("data-state", "still");
+			}
+		});
+
 		// $("#add-movie").on("click", function(event) {
 		//   // event.preventDefault() prevents the form from trying to submit itself.
 		// 	// We're using a form so that the user can hit enter instead of clicking the button if they want
