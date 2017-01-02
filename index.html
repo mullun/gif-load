@@ -27,6 +27,16 @@
 		</div>
 
 	  </div>   <!-- first row  holds heading-->
+
+	  <!-- Code to add elements to capture new animal to add -->
+	  <form id="animalToAdd">
+		<label for="animal-input">Add an Animal</label>
+		<input type="text" id="animalToInput"><br>
+
+		<!-- Button triggers new movie to be added -->
+		<input type="submit" value="Add an Animal">
+	  </form>
+
 	</div>  <!-- main container -->
 
 
@@ -43,7 +53,7 @@
 
 		// This function handles events where one button is clicked
 		$("button").on("click", function() {
-			console.log("one button clicked");
+			// console.log("one button clicked");
 			var clickedButton = $(this).data("name");  // grab data-name of clicked button
 			var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + clickedButton + "&api_key=dc6zaTOxFJmzC&limit=10";
 
@@ -52,32 +62,35 @@
 				method: "GET"
 			})
 			.done(function(response) {
-				var results = response.data;
+				results = response.data;
 				$("#gifImages").empty();   // clear out the existing images
 				for (var i = 0; i < results.length; i ++) {
-					var gifImageDiv = $("<div class='gifImageClass' id='gifImgDiv'>");  // div to hold the GIF images
+					var gifImageDiv = $("<div class=gifImageClass>");  // div to hold the GIF images
+					// console.log(results);
 					var rating = results[i].rating;   // capture the rating of the GIF
 					var p = $("<p>").text("Rating: " + rating);  // create a P tag with text about rating
-					var gifImage = $("<img>").attr("src", results[i].images.fixed_height.url);   // set the src attribute of img tag
+					var gifImage = $("<img class='imageObjectClass'>").attr("src", results[i].images.fixed_height.url);   // set the src attribute of img tag
+					$(gifImage).attr("data-state", "animate");
+					$(gifImage).attr("data-index", i); // keep track of the image location
 					gifImageDiv.prepend(p);  // put the rating text into the div
 					gifImageDiv.prepend(gifImage);  // put the image into the div, ahead of the rating text
 					$("#gifImages").append(gifImageDiv);
 				}
-
 			})
 		});
 
 		// the following code handles the event when a GIF image is clicked
-		$("#gifImgDiv").on("click", function() {
+		$(document).on("click", ".imageObjectClass", function() {
 			var imageState = $(this).attr("data-state");  // grab data-state of clicked image
-			console.log("image attr = " + $(this).attr("src"));
-			if (imageState === "still") {
-				console.log("image attr = " + $(this).attr("src"));
-				$(this).attr("src", $(this).attr("data-animate"));
-				$(this).attr("data-state", "animate");
-			} else {  // if image state === animate, change it to still
-				$(this).attr("src", $(this).attr("data-still"));
+			// console.log("data-state = " + imageState);
+			var dataIndex = $(this).attr("data-index");
+			// console.log("data-index = " + dataIndex);
+			if (imageState === "animate") {
+				$(this).attr("src", results[dataIndex].images.fixed_height_still.url);
 				$(this).attr("data-state", "still");
+			} else {  // if image state === still, change it to animate
+				$(this).attr("src", results[dataIndex].images.fixed_height.url);
+				$(this).attr("data-state", "animate");
 			}
 		});
 
