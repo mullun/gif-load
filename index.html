@@ -53,18 +53,9 @@
 			$("#buttonHolder").append(newButton);
 		}
 
-		// renderButtons() {
-		// 	for (var i = 0; i < animalArray.length; i ++ ) {
-		// 		var newButton = $("<button>"); // create new button
-		// 		newButton.addClass("animalButton");
-		// 		newButton.attr("data-name", animalArray[i]);  // name of the button
-		// 		newButton.text(animalArray[i]);  // text to be displayed on the button
-		// 		$("#buttonHolder").append(newButton);
-		// 	}
-		// };
-
 		// This function handles events where one button is clicked
-		$("button").on("click", function() {
+		$(document).on("click", "button", function(event) {
+			event.preventDefault();
 			// console.log("one button clicked");
 			var clickedButton = $(this).data("name");  // grab data-name of clicked button
 			var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + clickedButton + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -92,7 +83,8 @@
 		});
 
 		// the following code handles the event when a GIF image is clicked
-		$(document).on("click", ".imageObjectClass", function() {
+		$(document).on("click", ".imageObjectClass", function(event) {
+			event.preventDefault();
 			var imageState = $(this).attr("data-state");  // grab data-state of clicked image
 			// console.log("data-state = " + imageState);
 			var dataIndex = $(this).attr("data-index");
@@ -107,7 +99,8 @@
 		});
 
 		// This code captures information entered in text box and creates a new button
-		$(document).on("click", "#animalToInputButton", function() {
+		$(document).on("click", "#animalToInputButton", function(event) {
+			event.preventDefault();
 			var animalName = document.getElementById('animalToInput').value;
 			console.log("Entered animal Name = " + animalName);
 			animalArray.push(animalName);  // add the name of the animal to the array
@@ -122,24 +115,6 @@
 				$("#buttonHolder").append(newButton);
 			}
 		});
-
-		// $("#add-movie").on("click", function(event) {
-		//   // event.preventDefault() prevents the form from trying to submit itself.
-		// 	// We're using a form so that the user can hit enter instead of clicking the button if they want
-		//   event.preventDefault();
-
-		//   // This line will grab the text from the input box
-		//   var movie = $("#movie-input").val().trim();
-		//   // The movie from the textbox is then added to our array
-		//   movies.push(movie);
-
-		//   // calling renderButtons which handles the processing of our movie array
-		//   renderButtons();
-		// });
-
-		// // Calling the renderButtons function at least once to display the initial list of movies
-		//renderButtons();
-
 
 	</script>
 
