@@ -21,12 +21,6 @@
 		<div class="jumbotron">   <!-- jumbotron  -->
 			Click on a button - see the magic !
 		</div>   <!-- jumbotron  -->
-		<div id="buttonHolder">
-		</div>
-		<div id="gifImages" class="gifImagesDiv">
-		</div>
-
-	  </div>   <!-- first row  holds heading-->
 
 	  <!-- Code to add elements to capture new animal to add -->
 	  <form id="animalToAdd">
@@ -34,8 +28,16 @@
 		<input type="text" id="animalToInput"><br>
 
 		<!-- Button triggers new movie to be added -->
-		<input type="submit" value="Add an Animal">
+		<input type="submit" value="Add an Animal" id="animalToInputButton">
 	  </form>
+
+		<div id="buttonHolder">
+		</div>
+		<div id="gifImages" class="gifImagesDiv">
+		</div>
+
+	  </div>   <!-- first row  holds heading-->
+
 
 	</div>  <!-- main container -->
 
@@ -50,6 +52,16 @@
 			newButton.text(animalArray[i]);  // text to be displayed on the button
 			$("#buttonHolder").append(newButton);
 		}
+
+		// renderButtons() {
+		// 	for (var i = 0; i < animalArray.length; i ++ ) {
+		// 		var newButton = $("<button>"); // create new button
+		// 		newButton.addClass("animalButton");
+		// 		newButton.attr("data-name", animalArray[i]);  // name of the button
+		// 		newButton.text(animalArray[i]);  // text to be displayed on the button
+		// 		$("#buttonHolder").append(newButton);
+		// 	}
+		// };
 
 		// This function handles events where one button is clicked
 		$("button").on("click", function() {
@@ -94,6 +106,23 @@
 			}
 		});
 
+		// This code captures information entered in text box and creates a new button
+		$(document).on("click", "#animalToInputButton", function() {
+			var animalName = document.getElementById('animalToInput').value;
+			console.log("Entered animal Name = " + animalName);
+			animalArray.push(animalName);  // add the name of the animal to the array
+			console.log("new array = " + animalArray);
+			$("#buttonHolder").empty();   // clear out the existing buttons
+			// renderButtons();
+			for (var i = 0; i < animalArray.length; i ++ ) {
+				var newButton = $("<button>"); // create new button
+				newButton.addClass("animalButton");
+				newButton.attr("data-name", animalArray[i]);  // name of the button
+				newButton.text(animalArray[i]);  // text to be displayed on the button
+				$("#buttonHolder").append(newButton);
+			}
+		});
+
 		// $("#add-movie").on("click", function(event) {
 		//   // event.preventDefault() prevents the form from trying to submit itself.
 		// 	// We're using a form so that the user can hit enter instead of clicking the button if they want
@@ -109,7 +138,7 @@
 		// });
 
 		// // Calling the renderButtons function at least once to display the initial list of movies
-		// renderButtons();
+		//renderButtons();
 
 
 	</script>
