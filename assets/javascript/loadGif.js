@@ -1,41 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Gif Pics</title>
-	<meta charset="utf-8">
-
-	<link href="assets/css/reset.css" rel="stylesheet">
-
-	<!-- Added a link to Bootstrap-->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-	<!-- Added link to the jQuery Library -->
-	<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
-
-	<link href="assets/css/style.css" rel="stylesheet">  <!-- to add styling on top of Bootstrap -->
-</head>
-
-<body>
-	<div class="container">  <!-- main container -->
-	  <div class="row">   <!-- first row  holds heading-->
-		<div class="jumbotron">   <!-- jumbotron  -->
-			Click on a button - see the magic !
-		</div>   <!-- jumbotron  -->
-	  <!-- Code to add elements to capture new animal to add -->
-		 <form id="animalToAdd">
-			<label for="animal-input">Add an Animal</label>
-			<input type="text" id="animalToInput"><br>
-			<!-- Button triggers new movie to be added -->
-			<input type="submit" value="Add an Animal" id="animalToInputButton">
-		</form>
-		<div id="buttonHolder">
-		</div>
-		<div id="gifImages" class="gifImagesDiv">
-		</div>
-	  </div>   <!-- first row  holds heading-->
-	</div>  <!-- main container -->
-
-	<script type="text/javascript">
+	// <script type="text/javascript">
+	
 		var animalArray = ["lion", "tiger", "monkey", "cat", "dog", "squirrel", "rat", "giraffe", "snake"];
 
 		for (var i = 0; i < animalArray.length; i ++ ) {
@@ -51,7 +15,7 @@
 			event.preventDefault();
 			// console.log("one button clicked");
 			var clickedButton = $(this).data("name");  // grab data-name of clicked button
-			var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + clickedButton + "&api_key=dc6zaTOxFJmzC&limit=10";
+			var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + clickedButton + "&api_key=dc6zaTOxFJmzC&limit=10";
 
 			$.ajax({
 				url: queryURL,
@@ -108,6 +72,5 @@
 				$("#buttonHolder").append(newButton);
 			}
 		});
-	</script>
-</body>
-</html>
+
+	// </script>
